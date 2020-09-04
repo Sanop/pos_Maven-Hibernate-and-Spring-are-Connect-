@@ -3,7 +3,9 @@ package lk.ijse.dep.pos.dao.custom.impl;
 import lk.ijse.dep.pos.dao.custom.QueryDAO;
 import lk.ijse.dep.pos.entity.CustomEntity;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.transform.Transformers;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -11,16 +13,14 @@ import java.util.List;
 @Component
 public class QueryDAOImpl implements QueryDAO {
 
-    private Session session;
 
-    @Override
-    public void setSession(Session session) {
-        this.session = session;
-    }
+    @Autowired
+    private SessionFactory sessionFactory;
+
 
     @Override
     public CustomEntity getOrderDetail(String id) throws Exception {
-        return (CustomEntity) session.createNativeQuery("SELECT c.name AS customerName," +
+        return (CustomEntity) getSession().createNativeQuery("SELECT c.name AS customerName," +
                 "o.id AS orderID," +
                 "o.date orderDate FROM `Order` o INNER JOIN " +
                 "Customer c ON o.customerId = c.id WHERE o.id = ?1").setParameter(1,id).
@@ -29,14 +29,14 @@ public class QueryDAOImpl implements QueryDAO {
 
     @Override
     public CustomEntity getOrderDetail2(String id) throws Exception {
-        return (CustomEntity) session.createQuery("SELECT NEW entity.CustomEntity(C.id,C.name,O.id) " +
+        return (CustomEntity) getSession().createQuery("SELECT NEW entity.CustomEntity(C.id,C.name,O.id) " +
                 "FROM Order O INNER JOIN O.customer C WHERE O.id = :id").
                 setParameter("id",id);
     }
 
     @Override
     public List<CustomEntity> getAllOrderDetail() throws Exception {
-        return (List<CustomEntity>) session.createNativeQuery("SELECT O.id AS orderID,O.date AS orderDate,C.id AS customerID,C.name AS customerName,SUM(od.qty * od.unitPrice)as total FROM " +
+        return (List<CustomEntity>) getSession().createNativeQuery("SELECT O.id AS orderID,O.date AS orderDate,C.id AS customerID,C.name AS customerName,SUM(od.qty * od.unitPrice)as total FROM " +
                 "`Order` O inner join Customer C on " +
                 "O.customerId = c.id inner join OrderDetail OD " +
                 "on OD.orderId = O.id group by O.id, O.date, O.id, C.name").setResultTransformer(Transformers.aliasToBean(CustomEntity.class));
@@ -66,4 +66,8 @@ public class QueryDAOImpl implements QueryDAO {
     }
 
 
+    @Override
+    public Session getSession() {
+        return sessionFactory.getCurrentSession();
+    }
 }

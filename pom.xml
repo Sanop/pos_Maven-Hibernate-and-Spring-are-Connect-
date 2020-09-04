@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>lk.ijse.dep</groupId>
-    <artifactId>3-layerd-pos-hibernate-spring</artifactId>
+    <artifactId>pos-layerd-spring-knows-hibernate</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
 
@@ -48,6 +48,13 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
+            <version>5.2.8.RELEASE</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.springframework/spring-orm -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
             <version>5.2.8.RELEASE</version>
         </dependency>
 

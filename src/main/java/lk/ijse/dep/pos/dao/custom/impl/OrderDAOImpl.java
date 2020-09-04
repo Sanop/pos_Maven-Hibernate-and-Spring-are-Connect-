@@ -12,7 +12,7 @@ public class OrderDAOImpl extends CrudDAOImpl<Order,String> implements OrderDAO 
 
     @Override
     public String getLastOrderID() throws Exception {
-        List list = session.createQuery("SELECT O.id FROM lk.ijse.dep.pos.entity.Order O ORDER BY O.id DESC").setMaxResults(1).list();
+        List list = getSession().createQuery("SELECT O.id FROM lk.ijse.dep.pos.entity.Order O ORDER BY O.id DESC").setMaxResults(1).list();
 
         return (list.size() > 0) ? (String) list.get(0) : null;
     }
