@@ -41,6 +41,7 @@ public class OrderBOImpl implements OrderBO {
 
     }
 
+    @Transactional(readOnly = true)
     public String autoGeneratePlaceOrderID() throws Exception {
         String id = null;
         String oldID = orderDAO.getLastOrderID();

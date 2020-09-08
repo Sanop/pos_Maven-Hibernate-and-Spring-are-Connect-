@@ -19,6 +19,7 @@ public class ItemBOImpl implements ItemBO {
     @Autowired
     ItemDAO itemDAO;
 
+    @Transactional(readOnly = true)
     public String getNewItemCode() throws Exception {
 
         String id = "";
@@ -41,6 +42,7 @@ public class ItemBOImpl implements ItemBO {
         return id;
     }
 
+    @Transactional(readOnly = true)
     public List<ItemTM> getAllItems() throws Exception {
 
         List<ItemTM> itemTMS = new ArrayList<>();

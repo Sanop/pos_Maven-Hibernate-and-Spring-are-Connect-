@@ -18,6 +18,7 @@ public class CustomerBOImpl implements CustomerBO {
     @Autowired
     CustomerDAO customerDAO;
 
+    @Transactional(readOnly = true)
     public String getNewCustomerId() throws Exception {
         String id = "";
         String lastCustomerId = customerDAO.getLastCustomerID();
@@ -40,6 +41,7 @@ public class CustomerBOImpl implements CustomerBO {
         return id;
     }
 
+    @Transactional(readOnly = true)
     public List<CustomerTM> getAllCustomers() throws Exception {
 
         List<CustomerTM> customerTMS = new ArrayList<>();
