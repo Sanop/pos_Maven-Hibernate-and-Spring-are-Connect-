@@ -1,10 +1,15 @@
-# POS-layerd_Hibernate-spring(Spring knows hibernate)
+# POS Hibernate & Spring (Spring knows Hibernate)
 
-This is helps to know how spring link to hibernate
+Implement pos system with Hibernate and Spring 
 
-## Database
+## Other POS Projects
+[Pos_With_Hibernate_Spring_Maven](https://github.com/Sanop/Pos_With_Hibernate_Spring_Maven)
 
-Find Database Configuration From src/Database, & set your Database Password
+[Pos_With_Servlet](https://github.com/Sanop/POS_with_Servlet)
+
+[Pos_Maven_Hibernate](https://github.com/Sanop/pos_Maven_Hibernate)
+
+[Pos_With_DAO](https://github.com/Sanop/POS_With_DAO)
 
 
 ## Contributing
